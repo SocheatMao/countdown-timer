@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ByeBye2024</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .countdown-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2em;
+            color: #333;
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: center;
+        }
+
+        .time-box {
+            margin: 0 10px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        .label {
+            font-size: 0.8em;
+            color: #777;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #777;
+        }
+
+        .firework {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: transparent;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 4px rgba(255, 0, 0, 1);
+            animation: firework 1.5s ease-out infinite;
+        }
+
+        @keyframes firework {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-200px) scale(4);
+                opacity: 0;
+            }
+        }
+
+        .firework:nth-child(odd) {
+            animation-delay: calc(0.1s * var(--i));
+            animation-duration: calc(1.2s + (var(--i) * 0.3s));
+            left: calc(50% + 100px * (var(--i) - 3));
+            background-color: red;
+        }
+
+        .firework:nth-child(even) {
+            animation-delay: calc(0.15s * var(--i));
+            animation-duration: calc(1.5s + (var(--i) * 0.3s));
+            left: calc(50% - 100px * (var(--i) - 3));
+            background-color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <h1 id="headline">Countdown to 2025</h1>
+        <div id="countdown">
+            <div class="time-box">
+                <span id="days">00</span>
+                <span class="label">Days</span>
+            </div>
+            <div class="time-box">
+                <span id="hours">00</span>
+                <span class="label">Hours</span>
+            </div>
+            <div class="time-box">
+                <span id="minutes">00</span>
+                <span class="label">Minutes</span>
+            </div>
+            <div class="time-box">
+                <span id="seconds">00</span>
+                <span class="label">Seconds</span>
+            </div>
+        </div>
+        <footer>
+            
+            	<p>យ៉ូហាន ៣:១៦"ដ្បិត​ព្រះ​ទ្រង់​ស្រឡាញ់​មនុស្ស​លោក ដល់​ម៉្លេះ​បាន​ជា​ទ្រង់​ប្រទាន​ព្រះរាជបុត្រា​ទ្រង់​តែ​១"</p>
+		<p>ដើម្បី​ឲ្យ​អ្នក​ណា​ដែល​ជឿ​ដល់​ព្រះរាជបុត្រា​នោះ មិន​ត្រូវ​វិនាស​ឡើយ គឺ​ឲ្យ​មាន​ជីវិត​អស់​កល្ប​ជានិច្ច​វិញ" </p>
+		<p>credit to ChatGPT by Mr.Kon3SachTouch</p>
+        </footer>
+
+    </div>
+    <script>
+        for (let i = 1; i <= 20; i++) {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.setProperty('--i', i);
+            document.body.appendChild(firework);
+        }
+
+        const countdown = () => {
+            const countDate = new Date('January 1, 2025 00:00:00').getTime();
+            const now = new Date().getTime();
+            const gap = countDate - now;
+
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+
+            if (gap <= 0) {
+                document.getElementById('headline').innerText = "Happy New 2025!";
+                document.getElementById('countdown').style.display = 'none';
+                document.body.insertAdjacentHTML('beforeend', '<iframe width="0" height="0" src="https://www.youtube.com/watch?v=U58UBtEqvmo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
+                return;
+            }
+
+            const textDay = Math.floor(gap / day);
+            const textHour = Math.floor((gap % day) / hour);
+            const textMinute = Math.floor((gap % hour) / minute);
+            const textSecond = Math.floor((gap % minute) / second);
+
+            document.getElementById('days').innerText = textDay;
+            document.getElementById('hours').innerText = textHour;
+            document.getElementById('minutes').innerText = textMinute;
+            document.getElementById('seconds').innerText = textSecond;
+        };
+
+        setInterval(countdown, 1000);
+    </script>
+</body>
+</html>
