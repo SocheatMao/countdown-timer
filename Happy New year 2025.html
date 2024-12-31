@@ -24,6 +24,8 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             position: relative;
             z-index: 1;
+            width: 90%;
+            max-width: 600px;
         }
 
         h1 {
@@ -35,10 +37,11 @@
         #countdown {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .time-box {
-            margin: 0 10px;
+            margin: 10px;
         }
 
         .time-box span {
@@ -93,6 +96,33 @@
             background-color: red;
         }
 
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .time-box span {
+                font-size: 2em;
+            }
+
+            .label {
+                font-size: 0.7em;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .time-box {
+                margin: 5px;
+            }
+
+            .time-box span {
+                font-size: 1.5em;
+            }
+
+            .label {
+                font-size: 0.6em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -117,12 +147,10 @@
             </div>
         </div>
         <footer>
-            
-            	<p>យ៉ូហាន ៣:១៦"ដ្បិត​ព្រះ​ទ្រង់​ស្រឡាញ់​មនុស្ស​លោក ដល់​ម៉្លេះ​បាន​ជា​ទ្រង់​ប្រទាន​ព្រះរាជបុត្រា​ទ្រង់​តែ​១"</p>
-		<p>ដើម្បី​ឲ្យ​អ្នក​ណា​ដែល​ជឿ​ដល់​ព្រះរាជបុត្រា​នោះ មិន​ត្រូវ​វិនាស​ឡើយ គឺ​ឲ្យ​មាន​ជីវិត​អស់​កល្ប​ជានិច្ច​វិញ" </p>
-		<p>credit to ChatGPT by Mr.Kon3SachTouch</p>
+            <p>យ៉ូហាន ៣:១៦ "ដ្បិត​ព្រះ​ទ្រង់​ស្រឡាញ់​មនុស្ស​លោក ដល់​ម៉្លេះ​បាន​ជា​ទ្រង់​ប្រទាន​ព្រះរាជបុត្រា​ទ្រង់​តែ​១</p>
+            <p>ដើម្បី​ឲ្យ​អ្នក​ណា​ដែល​ជឿ​ដល់​ព្រះរាជបុត្រា​នោះ មិន​ត្រូវ​វិនាស​ឡើយ គឺ​ឲ្យ​មាន​ជីវិត​អស់​កល្ប​ជានិច្ច​វិញ"</p>
+            <p>credit to ChatGPT by Mr.Kon3SachTouch</p>
         </footer>
-
     </div>
     <script>
         for (let i = 1; i <= 20; i++) {
@@ -145,7 +173,7 @@
             if (gap <= 0) {
                 document.getElementById('headline').innerText = "Happy New 2025!";
                 document.getElementById('countdown').style.display = 'none';
-                document.body.insertAdjacentHTML('beforeend', '<iframe width="0" height="0" src="https://www.youtube.com/watch?v=U58UBtEqvmo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
+                document.body.insertAdjacentHTML('beforeend', '<iframe width="0" height="0" src="https://www.youtube.com/embed/U58UBtEqvmo?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
                 return;
             }
 
