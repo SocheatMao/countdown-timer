@@ -1,10 +1,9 @@
-update to to coundown 2026:
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ByeBye2024</title>
+    <title>ByeBye2025</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -128,7 +127,7 @@ update to to coundown 2026:
 </head>
 <body>
     <div class="countdown-container">
-        <h1 id="headline">Countdown to 2025</h1>
+        <h1 id="headline">Countdown to 2026</h1>
         <div id="countdown">
             <div class="time-box">
                 <span id="days">00</span>
@@ -154,6 +153,7 @@ update to to coundown 2026:
         </footer>
     </div>
     <script>
+        // Fireworks
         for (let i = 1; i <= 20; i++) {
             const firework = document.createElement('div');
             firework.className = 'firework';
@@ -161,8 +161,9 @@ update to to coundown 2026:
             document.body.appendChild(firework);
         }
 
+        // Countdown
         const countdown = () => {
-            const countDate = new Date('January 1, 2025 00:00:00').getTime();
+            const countDate = new Date('January 1, 2026 00:00:00').getTime();
             const now = new Date().getTime();
             const gap = countDate - now;
 
@@ -172,7 +173,7 @@ update to to coundown 2026:
             const day = hour * 24;
 
             if (gap <= 0) {
-                document.getElementById('headline').innerText = "Happy New 2025!";
+                document.getElementById('headline').innerText = "🎉 Happy New 2026! 🎆";
                 document.getElementById('countdown').style.display = 'none';
                 document.body.insertAdjacentHTML('beforeend', '<iframe width="0" height="0" src="https://www.youtube.com/embed/U58UBtEqvmo?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
                 return;
