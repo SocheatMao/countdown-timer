@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to 2026 - New Year Celebration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0c2461 0%, #1a237e 25%, #283593 50%, #3949ab 75%, #5c6bc0 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+            padding: 40px;
+            background: rgba(10, 25, 47, 0.85);
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #ffd700, #ff9500, #ff2a00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            color: #b3e5fc;
+            font-weight: 300;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 40px 25px;
+            min-width: 180px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .countdown-box:hover::before {
+            left: 100%;
+        }
+
+        .countdown-box:hover {
+            transform: translateY(-15px) scale(1.05);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+        }
+
+        .countdown-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5.5rem;
+            font-weight: 700;
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(33, 150, 243, 0.7);
+            background: linear-gradient(90deg, #4fc3f7, #29b6f6, #0288d1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .countdown-label {
+            font-size: 1.4rem;
+            margin-top: 10px;
+            color: #bbdefb;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+
+        .target-date {
+            font-size: 2rem;
+            margin: 40px 0;
+            color: #ffd700;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-sound {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+        }
+
+        .btn-sound:hover {
+            background: linear-gradient(135deg, #ff4b2b, #ff416c);
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 65, 108, 0.4);
+        }
+
+        .btn-test {
+            background: linear-gradient(135deg, #00b09b, #96c93d);
+            color: white;
+        }
+
+        .btn-test:hover {
+            background: linear-gradient(135deg, #96c93d, #00b09b);
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 176, 155, 0.4);
+        }
+
+        .btn-reset {
+            background: linear-gradient(135deg, #2196f3, #21cbf3);
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: linear-gradient(135deg, #21cbf3, #2196f3);
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(33, 150, 243, 0.4);
+        }
+
+        .sound-control {
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            font-size: 1.3rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sound-toggle {
+            position: relative;
+            display: inline-block;
+            width: 70px;
+            height: 35px;
+        }
+
+        .sound-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #555;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 27px;
+            width: 27px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background: linear-gradient(135deg, #00b09b, #96c93d);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(35px);
+        }
+
+        .message {
+            margin-top: 50px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 87, 34, 0.2));
+            border-radius: 20px;
+            font-size: 2.5rem;
+            display: none;
+            animation: pulse 1.5s infinite;
+            border: 3px solid rgba(255, 215, 0, 0.5);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        @keyframes pulse {
+            0% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+            }
+            50% { 
+                transform: scale(1.05);
+            }
+            70% { 
+                box-shadow: 0 0 0 25px rgba(255, 215, 0, 0);
+            }
+            100% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+            }
+        }
+
+        .celebration {
+            font-size: 6rem;
+            margin: 30px;
+            display: none;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-30px); }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #f0f;
+            top: -10px;
+            opacity: 0;
+        }
+
+        .footer {
+            margin-top: 60px;
+            color: #bbdefb;
+            font-size: 1.1rem;
+            text-align: center;
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+        }
+
+        .audio-notice {
+            background: rgba(255, 193, 7, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 2px solid #ffc107;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(255, 193, 7, 0.5); }
+            to { box-shadow: 0 0 25px rgba(255, 193, 7, 0.8); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .countdown-box {
+                min-width: 150px;
+                padding: 30px 20px;
+            }
+            
+            .countdown-value {
+                font-size: 4.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .countdown-container {
+                gap: 20px;
+            }
+            
+            .countdown-box {
+                min-width: 130px;
+                padding: 25px 15px;
+            }
+            
+            .countdown-value {
+                font-size: 3.5rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 85%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .countdown-container {
+                gap: 15px;
+            }
+            
+            .countdown-box {
+                min-width: 110px;
+                padding: 20px 10px;
+            }
+            
+            .countdown-value {
+                font-size: 2.8rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .message {
+                font-size: 1.8rem;
+                padding: 20px;
+            }
+            
+            .celebration {
+                font-size: 4rem;
+            }
+        }
+
+        /* Fireworks effect */
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-clock"></i> COUNTDOWN TO 2026</h1>
+        <p class="subtitle">New Year's Celebration Countdown</p>
+        
+        <div class="countdown-container">
+            <div class="countdown-box">
+                <div class="countdown-value" id="days">000</div>
+                <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-box">
+                <div class="countdown-value" id="hours">00</div>
+                <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-box">
+                <div class="countdown-value" id="minutes">00</div>
+                <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="countdown-box">
+                <div class="countdown-value" id="seconds">00</div>
+                <div class="countdown-label">Seconds</div>
+            </div>
+        </div>
+        
+        <div class="target-date" id="target-date">January 1, 2026 - 00:00:00</div>
+        
+        <div class="audio-notice" id="audio-notice">
+            <i class="fas fa-volume-up"></i> 
+            <strong>IMPORTANT:</strong> Click any button below to activate sound. 
+            Celebration fanfare will play when countdown reaches 2026!
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-sound" id="toggle-sound">
+                <i class="fas fa-volume-up"></i> SOUND: ON
+            </button>
+            <button class="btn btn-test" id="test-sound">
+                <i class="fas fa-music"></i> TEST CELEBRATION
+            </button>
+            <button class="btn btn-reset" id="reset-countdown">
+                <i class="fas fa-redo"></i> QUICK DEMO
+            </button>
+        </div>
+        
+        <div class="sound-control">
+            <span><i class="fas fa-bell"></i> Enable Celebration Sound:</span>
+            <label class="sound-toggle">
+                <input type="checkbox" id="sound-toggle" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+        
+        <div class="message" id="message">
+            <i class="fas fa-fireworks"></i> HAPPY NEW YEAR 2026! <i class="fas fa-fireworks"></i>
+        </div>
+        
+        <div class="celebration" id="celebration">
+            🎉🎊🥳✨🎆
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p><i class="fas fa-code"></i> Countdown to 2026 with Celebration Sound | HTML, CSS & JavaScript</p>
+        <p id="current-time"></p>
+        <p id="sound-status" style="margin-top: 10px; font-style: italic; color: #ffd700;"></p>
+    </div>
+
+    <script>
+        // DOM elements
+        const daysElement = document.getElementById('days');
+        const hoursElement = document.getElementById('hours');
+        const minutesElement = document.getElementById('minutes');
+        const secondsElement = document.getElementById('seconds');
+        const targetDateElement = document.getElementById('target-date');
+        const messageElement = document.getElementById('message');
+        const celebrationElement = document.getElementById('celebration');
+        const currentTimeElement = document.getElementById('current-time');
+        const soundStatusElement = document.getElementById('sound-status');
+        const toggleSoundBtn = document.getElementById('toggle-sound');
+        const testSoundBtn = document.getElementById('test-sound');
+        const resetBtn = document.getElementById('reset-countdown');
+        const soundToggle = document.getElementById('sound-toggle');
+        const audioNoticeElement = document.getElementById('audio-notice');
+        
+        // Audio context
+        let audioContext;
+        let audioInitialized = false;
+        
+        // Sound state
+        let soundEnabled = true;
+        let countdownFinished = false;
+        let userInteracted = false;
+        let isPlayingCelebration = false;
+        
+        // Set the target date to January 1, 2026
+        const targetDate = new Date('January 1, 2026 00:00:00').getTime();
+        targetDateElement.textContent = `January 1, 2026 - 00:00:00`;
+        
+        // Initialize audio on first user interaction
+        function initializeAudio() {
+            if (audioInitialized) return;
+            
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                audioInitialized = true;
+                userInteracted = true;
+                
+                soundStatusElement.textContent = "🎵 Audio activated! Celebration sound will play at 00:00!";
+                soundStatusElement.style.color = "#4caf50";
+                audioNoticeElement.style.display = 'none';
+                
+                // Play a short test tone to confirm audio works
+                setTimeout(() => playNote(440, 0.1), 100);
+                
+                console.log("Audio successfully initialized");
+            } catch (error) {
+                console.error("Audio initialization failed:", error);
+                soundStatusElement.textContent = "⚠️ Audio could not be initialized. Check browser permissions.";
+                soundStatusElement.style.color = "#ff9800";
+            }
+        }
+        
+        // Play a musical note
+        function playNote(frequency, duration, type = 'sine', volume = 0.2) {
+            if (!audioContext || !soundEnabled) return;
+            
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = frequency;
+                oscillator.type = type;
+                
+                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(volume, audioContext.currentTime + 0.01);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + duration);
+            } catch (error) {
+                console.error("Error playing note:", error);
+            }
+        }
+        
+        // Play celebration fanfare when 2026 arrives
+        function playCelebrationFanfare() {
+            if (!audioContext || !soundEnabled || !soundToggle.checked || isPlayingCelebration) return;
+            
+            isPlayingCelebration = true;
+            
+            // Happy New Year fanfare melody
+            const fanfare = [
+                // First phrase: "Happy New Year"
+                { note: 659.25, duration: 0.3 }, // E5
+                { note: 659.25, duration: 0.3 }, // E5
+                { note: 659.25, duration: 0.6 }, // E5
+                { note: 523.25, duration: 0.2 }, // C5
+                { note: 587.33, duration: 0.2 }, // D5
+                { note: 523.25, duration: 0.6 }, // C5
+                
+                // Second phrase
+                { note: 783.99, duration: 0.3 }, // G5
+                { note: 783.99, duration: 0.3 }, // G5
+                { note: 783.99, duration: 0.6 }, // G5
+                { note: 659.25, duration: 0.2 }, // E5
+                { note: 698.46, duration: 0.2 }, // F5
+                { note: 659.25, duration: 0.6 }, // E5
+                
+                // Climax
+                { note: 1046.50, duration: 0.4 }, // C6
+                { note: 880.00, duration: 0.2 }, // A5
+                { note: 987.77, duration: 0.2 }, // B5
+                { note: 1046.50, duration: 1.0 }, // C6
+                
+                // Final flourish
+                { note: 1318.51, duration: 0.2 }, // E6
+                { note: 1174.66, duration: 0.2 }, // D6
+                { note: 1046.50, duration: 0.2 }, // C6
+                { note: 987.77, duration: 0.2 }, // B5
+                { note: 1046.50, duration: 0.8 }, // C6
+            ];
+            
+            let timeOffset = 0;
+            
+            // Play the fanfare melody
+            fanfare.forEach((tone, index) => {
+                setTimeout(() => {
+                    playNote(tone.note, tone.duration, 'triangle', 0.3);
+                    
+                    // Add harmony on some notes
+                    if (index % 3 === 0) {
+                        playNote(tone.note * 0.5, tone.duration, 'sine', 0.15);
+                    }
+                }, timeOffset * 1000);
+                
+                timeOffset += tone.duration + 0.05;
+            });
+            
+            // Add percussion sounds
+            setTimeout(() => {
+                // Bass drum
+                playNote(80, 0.2, 'sine', 0.4);
+            }, 0);
+            
+            setTimeout(() => {
+                // Snare drum
+                playNote(150, 0.1, 'square', 0.3);
+            }, 600);
+            
+            setTimeout(() => {
+                // Cymbal crash
+                playNote(800, 1.5, 'sine', 0.2);
+            }, 1200);
+            
+            // Fireworks sounds during the fanfare
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const freq = 200 + Math.random() * 800;
+                    playNote(freq, 0.5 + Math.random() * 0.5, 'sawtooth', 0.15);
+                }, 500 + i * 400);
+            }
+            
+            // Reset flag after fanfare completes
+            setTimeout(() => {
+                isPlayingCelebration = false;
+            }, 5000);
+        }
+        
+        // Play countdown tick during last 10 seconds
+        function playCountdownTick(secondsLeft) {
+            if (!audioContext || !soundEnabled || secondsLeft > 10) return;
+            
+            // Higher pitch as we get closer to zero
+            const pitch = 800 + (10 - secondsLeft) * 50;
+            playNote(pitch, 0.1, 'sine', 0.1);
+            
+            // Bass note on second tick
+            if (secondsLeft % 2 === 0) {
+                playNote(100, 0.15, 'sine', 0.08);
+            }
+        }
+        
+        // Create fireworks animation
+        function createFireworks() {
+            const container = document.querySelector('.container');
+            
+            for (let i = 0; i < 50; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                
+                // Random position
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                firework.style.left = `${posX}%`;
+                firework.style.top = `${posY}%`;
+                
+                // Random color
+                const colors = ['#ff0000', '#ff9900', '#ffff00', '#00ff00', '#00ffff', '#ff00ff', '#ffffff'];
+                firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                container.appendChild(firework);
+                
+                // Animate
+                firework.animate([
+                    { transform: 'scale(0) translateY(0)', opacity: 1 },
+                    { transform: `scale(1) translateY(${Math.random() * 100 - 50}px)`, opacity: 0.8 },
+                    { transform: `scale(0) translateY(${Math.random() * 100 - 50}px)`, opacity: 0 }
+                ], {
+                    duration: 1000 + Math.random() * 2000,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.9, 0.1)'
+                });
+                
+                // Remove after animation
+                setTimeout(() => firework.remove(), 3000);
+            }
+        }
+        
+        // Update current time display
+        function updateCurrentTime() {
+            const now = new Date();
+            currentTimeElement.textContent = `Current Time: ${now.toLocaleString('en-US', { 
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            })}`;
+        }
+        
+        // Update countdown
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeRemaining = targetDate - now;
+            
+            // If countdown is finished
+            if (timeRemaining <= 0) {
+                clearInterval(countdownInterval);
+                
+                // Show celebration
+                daysElement.textContent = '000';
+                hoursElement.textContent = '00';
+                minutesElement.textContent = '00';
+                secondsElement.textContent = '00';
+                
+                // Show celebration message
+                messageElement.style.display = 'block';
+                celebrationElement.style.display = 'block';
+                
+                // Play celebration fanfare
+                if (soundEnabled && soundToggle.checked && userInteracted && !countdownFinished) {
+                    playCelebrationFanfare();
+                    countdownFinished = true;
+                    
+                    // Create fireworks animation
+                    createFireworks();
+                    
+                    // Continue fireworks every 500ms
+                    const fireworksInterval = setInterval(createFireworks, 500);
+                    setTimeout(() => clearInterval(fireworksInterval), 10000);
+                }
+                
+                return;
+            }
+            
+            // Calculate time units
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            
+            // Update display with leading zeros
+            daysElement.textContent = days.toString().padStart(3, '0');
+            hoursElement.textContent = hours.toString().padStart(2, '0');
+            minutesElement.textContent = minutes.toString().padStart(2, '0');
+            secondsElement.textContent = seconds.toString().padStart(2, '0');
+            
+            // Play countdown tick in last 10 seconds
+            if (soundEnabled && userInteracted && timeRemaining < 11000) {
+                playCountdownTick(seconds);
+            }
+        }
+        
+        // Toggle sound
+        toggleSoundBtn.addEventListener('click', function() {
+            if (!userInteracted) initializeAudio();
+            
+            soundEnabled = !soundEnabled;
+            if (soundEnabled) {
+                toggleSoundBtn.innerHTML = '<i class="fas fa-volume-up"></i> SOUND: ON';
+                toggleSoundBtn.classList.remove('btn-test');
+                toggleSoundBtn.classList.add('btn-sound');
+                soundStatusElement.textContent = "🔊 Sound enabled";
+            } else {
+                toggleSoundBtn.innerHTML = '<i class="fas fa-volume-mute"></i> SOUND: OFF';
+                toggleSoundBtn.classList.remove('btn-sound');
+                toggleSoundBtn.classList.add('btn-test');
+                soundStatusElement.textContent = "🔇 Sound disabled";
+            }
+        });
+        
+        // Test celebration sound
+        testSoundBtn.addEventListener('click', function() {
+            if (!userInteracted) initializeAudio();
+            
+            if (soundEnabled) {
+                // Play a shorter test fanfare
+                soundStatusElement.textContent = "🎶 Playing celebration preview...";
+                
+                // Test fanfare
+                playNote(659.25, 0.3, 'triangle', 0.3);
+                setTimeout(() => playNote(783.99, 0.3, 'triangle', 0.3), 400);
+                setTimeout(() => playNote(1046.50, 0.6, 'triangle', 0.4), 800);
+                
+                // Visual feedback
+                testSoundBtn.innerHTML = '<i class="fas fa-check"></i> TESTING...';
+                setTimeout(() => {
+                    testSoundBtn.innerHTML = '<i class="fas fa-music"></i> TEST CELEBRATION';
+                    soundStatusElement.textContent = "✅ Celebration sound is ready for 2026!";
+                }, 1500);
+            }
+        });
+        
+        // Reset countdown for demo (sets to 15 seconds from now)
+        resetBtn.addEventListener('click', function() {
+            if (!userInteracted) initializeAudio();
+            
+            // Hide any existing celebration
+            messageElement.style.display = 'none';
+            celebrationElement.style.display = 'none';
+            
+            // Set demo target to 15 seconds from now
+            const demoTime = new Date().getTime() + 15000;
+            clearInterval(countdownInterval);
+            
+            soundStatusElement.textContent = "⏱️ Demo started! Countdown reset to 15 seconds";
+            
+            // Demo countdown function
+            function updateDemoCountdown() {
+                const now = new Date().getTime();
+                const timeRemaining = demoTime - now;
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(countdownInterval);
+                    
+                    // Show celebration
+                    daysElement.textContent = '000';
+                    hoursElement.textContent = '00';
+                    minutesElement.textContent = '00';
+                    secondsElement.textContent = '00';
+                    
+                    messageElement.style.display = 'block';
+                    celebrationElement.style.display = 'block';
+                    
+                    // Play celebration fanfare
+                    if (soundEnabled && soundToggle.checked && userInteracted) {
+                        playCelebrationFanfare();
+                        createFireworks();
+                    }
+                    
+                    // Restore original countdown after 10 seconds
+                    setTimeout(() => {
+                        countdownFinished = false;
+                        messageElement.style.display = 'none';
+                        celebrationElement.style.display = 'none';
+                        targetDateElement.textContent = `January 1, 2026 - 00:00:00`;
+                        countdownInterval = setInterval(updateCountdown, 1000);
+                        soundStatusElement.textContent = "✅ Demo complete! Back to 2026 countdown";
+                    }, 10000);
+                    
+                    return;
+                }
+                
+                // Calculate time for demo (all less than 1 day)
+                const days = 0;
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                
+                // Update display
+                daysElement.textContent = days.toString().padStart(3, '0');
+                hoursElement.textContent = hours.toString().padStart(2, '0');
+                minutesElement.textContent = minutes.toString().padStart(2, '0');
+                secondsElement.textContent = seconds.toString().padStart(2, '0');
+                
+                // Update target display for demo
+                const demoDate = new Date(demoTime);
+                targetDateElement.textContent = `Demo: ${demoDate.toLocaleTimeString()} (15 second countdown)`;
+                
+                // Play countdown tick in last 10 seconds
+                if (soundEnabled && userInteracted && timeRemaining < 11000) {
+                    playCountdownTick(seconds);
+                }
+            }
+            
+            // Start demo countdown
+            countdownInterval = setInterval(updateDemoCountdown, 1000);
+            
+            // Button feedback
+            resetBtn.innerHTML = '<i class="fas fa-play"></i> DEMO RUNNING';
+            setTimeout(() => {
+                resetBtn.innerHTML = '<i class="fas fa-redo"></i> QUICK DEMO';
+            }, 16000);
+        });
+        
+        // Initialize audio on any click
+        document.addEventListener('click', function initAudio() {
+            if (!userInteracted) {
+                initializeAudio();
+                document.removeEventListener('click', initAudio);
+            }
+        });
+        
+        // Initialize the countdown
+        updateCountdown();
+        updateCurrentTime();
+        
+        // Start intervals
+        let countdownInterval = setInterval(updateCountdown, 1000);
+        setInterval(updateCurrentTime, 1000);
+        
+        // Initial status
+        soundStatusElement.textContent = "👉 Click any button to activate celebration sound for 2026!";
+        
+        // Add visual effects to countdown boxes
+        document.querySelectorAll('.countdown-box').forEach(box => {
+            box.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.05)';
+            });
+            
+            box.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
